@@ -1,0 +1,1080 @@
+@charset "UTF-8";
+@import "head";
+
+/* 共通部分
+------------------------------ */
+html {
+    font-size: 100%;
+}
+body {
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+}
+.noscroll {
+    overflow: hidden;
+}
+a {
+    text-decoration: none;
+}
+img {
+    max-width: 100%;
+    vertical-align:bottom;
+}
+li {
+    list-style-type: none;
+}
+.inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+
+    @include tb {
+        padding: 0 4vw;
+    }
+}
+.sec-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.068em;
+    color: #333333;
+    margin-bottom: 30px;
+
+    @include sp {
+        font-size: 1.75rem;
+    }
+}
+.text {
+    font-size: 1rem;
+    line-height: 2;
+    color: #333333;
+
+    @include sp {
+        font-size: 0.875rem;
+    }
+}
+.more-btn {
+    margin-top: 30px;
+    // padding: 10px 40px;
+    background-color: #000;
+    width: 160px;
+    height: 36px;
+    
+    a{
+        display: block;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: bold;
+        letter-spacing: 0.015em;
+        line-height: 36px;
+        width: 100%;
+        height: 100%;
+
+        @include tb {
+            font-size: 0.6875rem;
+        }
+    }
+}
+.blend-color {
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(#000, 0.2);
+        display: block;
+    }
+}
+
+/* header
+------------------------------ */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 10;
+    transition: 0.5s;
+
+    &.sticky {
+        background-color: #282F35;
+        transition: 0.5s;
+    }
+
+    a {
+        color: #fff;
+    }
+    
+    .header-wrap {
+        padding: 30px 98px 30px 58px;
+        display: flex;
+        justify-content: space-between;
+
+        @include tb {
+            padding: 33px 70px 33px 30px;
+        }
+        @include sp {
+            padding: 20px 55px 20px 15px;
+        }
+
+        .logo {
+            width: 260px;
+
+            @include tb {
+                width: 189px;
+            }
+            @include sp {
+                width: 125px;
+            }
+
+            a {
+                display: flex;
+            }
+        }
+
+        .header-nav {
+            .nav-list { // ハンバーガーメニュー
+                display: flex;
+                width: 35%; // 横幅
+                height: 100vh; // 高さいっぱい
+                flex-direction: column; // 縦並び
+                align-items: center;
+                background-color: rgba(#222, 0.95);
+                transition: 0.5s; // アニメーション時間
+                position: absolute; // 絶対位置
+                top: 0;
+                right: -100%; // デフォルトでは見えないように
+                padding-top: 165px;
+
+                @include tb {
+                    width: 50%;
+                }
+                @include sp {
+                    width: 70%;
+                }
+
+                &.open {
+                    right: 0%;
+                }
+
+                .nav-item {
+                    width: 100%;
+                    // height: 100%;
+                    margin-left: 0;
+                    padding: 15px 0;
+
+                    a {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        text-align: center;
+                        font-size: 1.25rem;
+                        font-weight: 800;
+                        letter-spacing: 0.068em;
+                    }
+                    &:first-of-type {
+                        width: 42px;
+                    }
+                }
+            }
+        }
+
+        .hum-btn {
+            width: 22px;
+            color: #fff;
+
+            .hum-btn-line {
+                display: block;
+                position: relative;
+                width: 100%;
+                height: 2px;
+                background-color: #fff;
+                transition: 0.2s;
+
+                &::before,
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #fff;
+                    transition: 0.5s;
+                }
+
+                &::before {
+                    transform: translateY(-5px);
+                }
+                &::after {
+                    transform: translateY(5px);
+                }
+
+                &.open {
+                    background-color: transparent;
+
+                    &::before {
+                        transform: rotate(30deg);
+                        transition: 0.5s;
+                    }
+                    &::after {
+                        transform: rotate(-30deg);
+                        transition: 0.5s;
+                    }
+                }
+
+                span::after {
+                    content: "MENU";
+                    font-size: 0.625rem;
+                    font-weight: 800;
+                    letter-spacing: 0.005em;
+                    position: absolute;
+                    top: -5px;
+                    left: 30px;
+                }
+            }
+        }
+    }
+}
+
+/* fv
+------------------------------ */
+.fv {
+    height: 100vh;
+    display: flex;
+    color: #fff;
+    
+    .left-box {
+        width: 46%;
+
+        .fv-img-wrap {
+            position: relative;
+            height: 85%;
+            width: 77vw;
+            z-index: 1;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    .right-box {
+        width: 54%;
+        background-color: #222222;
+        position: relative;
+
+        .fv-text-wrap {
+            position: absolute;
+            top: 21%;
+            right: 25%;
+            z-index: 2;
+
+            @include tb {
+                top: 32%;
+                right: 19%;
+            }
+            @include sp {
+                top: 26%;
+                right: 10%;
+            }
+
+            .fv-text {
+                font-size: 1.25rem;
+                font-weight: bold;
+
+                @include tb {
+                    font-size: 1rem;
+                }
+            }
+            .fv-title {
+                font-size: 4.5rem;
+                line-height: 1.2;
+
+                @include tb {
+                    font-size: 3.5rem;
+                    letter-spacing: 0.063em;
+                }
+            }
+        }
+    }
+}
+
+
+/* about
+------------------------------ */
+.about {
+    padding: 120px 0 0 0;
+    height: 650px;
+
+    @include tb {
+        padding: 80px 0 0 0;
+        height: auto;
+
+        .inner {
+            padding: 0;
+        }
+    }
+
+    .about-img-wrap {
+        position: relative;
+        max-width: 1100px;
+        width: 100%;
+        background-image: url('../img/index/about_img@2x.jpg');
+        background-size: cover;
+        background-position: center center;
+        padding: 110px 50px;
+
+        @include tb {
+            position: relative;
+            padding: 60px 89px;
+            height: 100%;
+        }
+        @include sp {
+            padding: 50px 15px;
+        }
+
+        .about-text-wrap {
+            background-color: #fff;
+            width: 590px;
+            padding: 50px 30px;
+            position: relative;
+            z-index: 1;
+
+            @include tb {
+            padding: 40px 30px;
+            width: auto;
+            }
+            @include sp {
+                padding: 50px 30px;
+            }
+
+            .text {
+                margin-bottom: 1rem;
+
+                @include sp {
+                    margin-bottom: 2rem;
+                }
+            }
+        }
+    }
+}
+
+/* works & culture
+------------------------------ */
+.two-clm {
+    background-color: #F0F0F0;
+
+    .two-clm-flex {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 180px;
+        padding-bottom: 60px;
+
+        @include tb {
+            flex-direction: column;
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        @include sp {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .works,
+        .culture {
+            max-width: 520px;
+
+            .two-clm-img-wrap {
+                width: 100%;
+            }
+
+            @include sp {
+                .text {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .works {
+            @include tb {
+                margin-bottom: 80px;
+            }
+            @include sp {
+                margin-bottom: 40px;
+            }
+        }
+
+        .culture {
+            margin-left: 30px;
+
+            @include tb {
+                margin-left: 0;
+            }
+        }
+
+        .text {
+            padding-top: 27px;
+        }
+    }
+}
+
+/* topics
+------------------------------ */
+.topics {
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    @include tb {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .right-wrap {
+        width: 64%;
+        margin: 0 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        @include tb {
+            width: 100%;
+        }
+
+        .topics-list {
+            .topics-item {
+                border-bottom: 1px solid #DDD;
+                margin-bottom: 29px;
+
+                .date {
+                    font-size: 0.625rem;
+                    font-weight: bold;
+                    letter-spacing: 0.015em;
+                    color: #CECECE;
+                    margin-bottom: 9px;
+                }
+                .title {
+                    font-size: 0.875rem;
+                    font-weight: bold;
+                    letter-spacing: 0.004em;
+                    color: #333333;
+                    margin-bottom: 10px;
+
+                    @include sp {
+                        font-size: 0.75rem;
+                        letter-spacing: 0.068em;
+                        margin-bottom: 8px;
+                    }
+                }
+            }
+            .topics-item:not(:last-of-type) {
+                @include sp {
+                    margin-bottom: 19px;
+                }
+            }
+        }
+        .more-btn {
+            margin: 0 0 0 auto;
+
+            @include tb {
+                margin: 0;
+            }
+        }
+    }
+}
+
+/* contact
+------------------------------ */
+.contact {
+    padding: 60px 0 120px;
+    background-color: #F0F0F0;
+
+    @include tb {
+        padding: 40px 0 80px;
+    }
+    @include sp {
+        padding: 40px 0 40px;
+    }
+
+    .contact-wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include tb {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+        }
+
+        .left-wrap {
+            max-width: 430px;
+
+            @include tb {
+                max-width: 520px;
+
+                .sec-title {
+                    margin-top: 30px;
+                }
+            }
+            @include sp {
+                .text {
+                    font-size: 1rem;
+                }
+            }
+
+            .text {
+                margin-bottom: 1rem;
+            }
+        }
+        .right-wrap {
+            max-width: 580px;
+            margin-left: 30px;
+
+            @include tb {
+                margin-left: 0;
+                max-width: 520px;
+            }
+        }
+    }
+}
+
+/* footer
+------------------------------ */
+.footer {
+    padding: 18px 0;
+    background-color: #525252;
+    text-align: center;
+    color: #fff;
+    font-size: 0.625rem;
+}
+
+/* scroll
+------------------------------ */
+
+/*スクロールダウン全体の場所*/
+.scroll-down {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    z-index:3
+}
+
+/*Scrollテキストの描写*/
+.scroll-down span {
+    /*描画位置*/
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    /*テキストの形状*/
+    color: #eee;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    /*縦書き設定*/
+    -ms-writing-mode: tb-rl;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+}
+
+/* 丸の描写 */
+.scroll-down:before {
+    content: "";
+    /*描画位置*/
+    position: absolute;
+    bottom: 0;
+    left: -4px;
+    /*丸の形状*/
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #eee;
+    /*丸の動き1.6秒かけて透過し、永遠にループ*/
+    animation:
+        circlemove 1.6s ease-in-out infinite,
+        cirlemovehide 1.6s ease-out infinite;
+}
+
+/*下からの距離が変化して丸の全体が上から下に動く*/
+@keyframes circlemove {
+    0% {
+        bottom: 45px;
+    }
+
+    100% {
+        bottom: -5px;
+    }
+}
+
+/*上から下にかけて丸が透過→不透明→透過する*/
+@keyframes cirlemovehide {
+    0% {
+        opacity: 0
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* 線の描写 */
+.scroll-down::after {
+    content: "";
+    /*描画位置*/
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    /*線の形状*/
+    width: 2px;
+    height: 50px;
+    background: #eee;
+}
+
+/* ------------------------------
+　　　　　Aboutページ
+------------------------------ */
+
+// About > fv
+.sub-fv {
+    height: 52vh;
+    display: flex;
+    color: #fff;
+
+    @include tb {
+        height: 60vh;
+    }
+    @include sp {
+        height: 67.3vh;
+    }
+    
+    .left-box {
+        width: 46%;
+
+        .fv-img-wrap {
+            position: relative;
+            height: 83%;
+            width: 76vw;
+            z-index: 1;
+
+            @include tb {
+                overflow: hidden;
+            }
+            @include sp {
+                height: 86%;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                // object-position: 0 10%;
+
+                @include tb {
+                    transform: scale(1.6);
+                    // object-position: 56% 82px;
+                }
+                @include sp {
+                    transform: scale(1.8);
+                }
+            }
+        }
+    }
+    .right-box {
+        width: 54%;
+        background-color: #222222;
+        position: relative;
+
+        .fv-text-wrap {
+            position: absolute;
+            top: 33%;
+            right: 22%;
+            z-index: 2;
+
+            @include tb {
+                top: 41%;
+                right: 24%;
+            }
+            @include sp {
+                top: 33%;
+                right: 15%;
+            }
+
+            .fv-text {
+                font-size: 1.25rem;
+                letter-spacing: 0.005em;
+
+                @include tb {
+                    font-size: 1rem;
+                }
+            }
+            .fv-title {
+                font-size: 4.5rem;
+                line-height: 1.2;
+                letter-spacing: 0.063em;
+                white-space: nowrap;
+
+                @include tb {
+                    font-size: 3.25rem;
+                    line-height: 1.65;
+                }
+                @include sp {
+                    letter-spacing: 0;
+                    margin-bottom: 7px;
+                }
+            }
+        }
+    }
+}
+
+// About > vision
+.vision {
+    padding: 120px 0;
+
+    @include tb {
+        padding: 80px 0;
+    }
+
+    .vision-text-wrap {
+        padding-left: 20%;
+
+        @include tb {
+            padding-left: 21%;
+        }
+        @include sp {
+            padding-left: 0;
+        }
+
+        .sec-title {
+            margin-bottom: 25px;
+
+            @include sp {
+                margin-bottom: 32px;
+            }
+        }
+        .sub-title {
+            font-size: 1.5rem;
+            letter-spacing: 0.005em;
+            font-weight: bold;
+            margin-bottom: 27px;
+
+            @include tb {
+                font-weight: normal;
+                margin-bottom: 32px;
+            }
+            @include sp {
+                letter-spacing: 0;
+            }
+        }
+    }
+}
+
+// About > message
+.message {
+    padding-bottom: 120px;
+
+    @include tb {
+        padding-bottom: 82px;
+    }
+    @include sp {
+        padding-bottom: 80px;
+    }
+
+    .inner {
+        padding-top: 144px;
+        position: relative;
+
+        @include tb {
+            padding-top: 131px;
+        }
+
+        .message-img-wrap {
+            max-width: 420px;
+            width: 38%;
+            position: absolute;
+            top: 0;
+            left: 4vw;
+
+            @include tb {
+                max-width: 350px;
+                width: 42%;
+            }
+            @include sp {
+                max-width: 340px;
+                width: 90.6%;
+                left: 0;
+            }
+        }
+        .message-text-wrap {
+            max-width: 770px;
+            background-color: #F0F0F0;
+            padding: 120px 185px 90px;
+            margin: 0 0 0 auto;
+
+            @include tb {
+                width: 70%;
+                padding: 109px 39px 78px;
+            }
+            @include sp {
+                width: 100%;
+                padding: 126px 29px 80px;
+            }
+        }
+    }
+}
+
+// About > company
+.company {
+    padding-bottom: 120px;
+
+    @include tb {
+        padding-bottom: 80px;
+    }
+
+    .company-list {
+        border-top: 1px solid #DDD;
+        margin-bottom: 40px;
+
+        .company-item {
+            letter-spacing: 0.004em;
+            display: flex;
+            padding: 17px 0 18px;
+            max-width: 800px;
+            margin: 0 0 0 auto;
+            border-bottom: 1px solid #DDD;
+
+            @include tb {
+                margin-left: 30px;
+            }
+            @include sp {
+                margin-left: 0;
+                font-size: 0.875rem;
+                padding: 21px 0 20px;
+            }
+
+            .company-item-name {
+                font-weight: bold;
+                width: 144px;
+
+                @include sp {
+                    width: 163px;
+                    font-weight: normal;
+                }
+            }
+            .company-item-text {
+                font-weight: 500;
+
+                @include sp {
+                    font-weight: normal;
+                }
+            }
+        }
+    }
+    .map {
+        iframe {
+            width: 100%;
+
+            @include tb {
+                height: 230px;
+            }
+            @include sp {
+                height: 470px;
+            }
+        }
+    }
+}
+
+/* ------------------------------
+　　　　　Contactページ
+------------------------------ */
+.sub-fv.contact-fv {
+    height: 54.7vh;
+
+    .left-box {
+        .fv-img-wrap {
+            height: 74%;
+        }
+    }
+    .right-box {
+        .fv-text-wrap {
+            @include tb {
+                top: 22%;
+                right: 12%;
+            }
+            @include sp {
+                top: 29%;
+                right: 11%;
+
+                .fv-text {
+                    text-align: right;
+                }
+            }
+        }
+    }
+}
+
+.form-wrap {
+    max-width: 700px;
+    padding: 120px 4vw;
+    margin: 0 auto;
+    font-size: 1rem;
+    letter-spacing: 0.004em;
+
+    @include tb {
+        max-width: 100%;
+        padding: 135px 6.5vw 197px;
+    }
+    @include sp {
+        max-width: 100%;
+        padding: 80px 4vw;
+    }
+
+    .top-text {
+        line-height: 1.5;
+        margin-bottom: 52px;
+
+        @include tb {
+            margin-bottom: 18px;
+        }
+        @include sp {
+            font-size: 0.875rem;
+            line-height: 1.71;
+            margin-bottom: 48px;
+        }
+    }
+
+    .form-item {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 42px;
+
+        @include tb {
+            margin-bottom: 37px;
+        }
+
+        .must::after {
+            content: "必須";
+            background-color: #333;
+            color: #fff;
+            font-size: 0.750rem;
+            padding: 3px 10px;
+            margin-left: 20px;
+
+            @include tb {
+                padding: 3px 5px;
+            }
+        }
+
+        .form-item-title {
+            margin-bottom: 10px;
+
+            @include tb {
+                margin-bottom: 8px;
+            }
+            @include sp {
+                margin-bottom: 10px;
+            }
+        }
+
+        .radio-list {
+            @include sp {
+                display: flex;
+                flex-direction: column;
+                margin-left: 10px;
+            }
+
+            .radio-list-item {
+                &:not(:first-of-type) {
+                    margin-left: 50px;
+
+                    @include sp {
+                        margin: 14px 0 0;
+                    }
+                }
+
+                .type {
+                    margin-right: 10px;
+                    color: #333;
+                }
+            }
+        }
+
+        .input-text,
+        .input-textarea {
+            border: 1px solid #333;
+        }
+
+        .input-text {
+            height: 41px;
+
+            @include sp {
+                height: 48px;
+            }
+        }
+
+        .input-textarea {
+            height: 212px;
+
+            @include tb {
+                height: 180px;
+            }
+        }
+    }
+
+    .privacy {
+        margin-bottom: 42px;
+
+        @include tb {
+            margin-bottom: 39px;
+        }
+
+        .privacy-title {
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .privacy-text {
+            height: 242px;
+            overflow: scroll;
+            border: 1px solid #333;
+            padding: 10px;
+
+            @include sp {
+                font-size: 0.875rem;
+            }
+        }
+    }
+
+    .concent {
+        margin-bottom: 42px;
+        text-align: center;
+
+        @include tb {
+            margin-bottom: 40px;
+        }
+        @include sp {
+            font-size: 0.875rem;
+        }
+
+        .agree {
+            margin-right: 10px;
+        }
+    }
+
+    .submit {
+        text-align: center;
+
+        .submit-input {
+            display: inline-block;
+            padding: 8px 66px;
+            color: #fff;
+            background-color: #000;
+        }
+    }
+}

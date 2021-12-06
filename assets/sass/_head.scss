@@ -1,0 +1,12 @@
+// メディアクエリ
+@mixin sp($max-width: 599px) {
+    @media(max-width: $max-width) {
+        @content;
+    }
+}
+
+@mixin tb($max-width: 1024px) {
+    @media(max-width: $max-width) {
+        @content;
+    }
+}
